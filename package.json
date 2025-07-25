@@ -1,8 +1,9 @@
 {
   "dependencies": {
+    "@react-google-maps/api": "^2.20.7",
     "concurrently": "^9.2.0"
   },
-   "scripts": {
+  "scripts": {
     "start": "concurrently \"cd frontend && npm run dev\" \"cd backend && node --watch index\""
   }
 }

@@ -7,12 +7,17 @@ const cors = require("cors");
 
 
 
-const UserRouters = require("./routers/UserRouters")
 
+const booknowRouters = require('./routers/booknowRouters');
+
+const corsOptions = {
+  origin: "http://localhost:3000", // Only allow this frontend
+  credentials: true,              // Allow cookies/authorization headers
+};
 // Middlewares
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(express.json());
-server.use("/user", UserRouters)
+server.use("/booknow",booknowRouters)
 
 
 mongoose.connect(process.env.MONGODB_URL, { dbName: "texiride" }).then(
