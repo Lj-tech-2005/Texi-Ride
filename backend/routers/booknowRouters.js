@@ -11,6 +11,8 @@ const booknowRouters = express.Router();
 
 booknowRouters.post("/", booknowControllers.create);
 booknowRouters.get("/readall", booknowControllers.readAll);
+booknowRouters.delete("/delete/:id", booknowControllers.deleteBooking);
+booknowRouters.patch("/status/:id", booknowControllers.updateStatus);
 
 
 

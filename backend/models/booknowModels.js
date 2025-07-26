@@ -48,6 +48,10 @@ const booknowSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  status: {
+    type: Boolean,
+    default:false, // true = active, false = inactive
+  },
 
   createdAt: {
     type: Date,

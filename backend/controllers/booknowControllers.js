@@ -1,3 +1,4 @@
+const BooknowModel = require("../models/booknowModels");
 const booknowModel = require("../models/booknowModels");
 
 const booknowControllers = {
@@ -74,9 +75,46 @@ const booknowControllers = {
         msg: "Internal server error.",
       });
     }
+  },
+
+  async deleteBooking(req, res) {
+    try {
+      const id = req.params.id;
+      const deleted = await BooknowModel.findByIdAndDelete(id);
+
+      if (!deleted) {
+        return res.json({ flag: 0, msg: 'Booking not found' });
+      }
+
+      res.json({ flag: 1, msg: 'Booking deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ flag: 0, msg: 'Server error' });
+    }
+  },
+
+  async updateStatus(req, res) {
+    try {
+      const id = req.params.id;
+      const { status } = req.body;
+
+      const updated = await booknowModel.findByIdAndUpdate(
+        id,
+        { status },
+        { new: true }
+      );
+
+      if (!updated) {
+        return res.json({ flag: 0, msg: 'Booking not found' });
+      }
+
+      res.json({ flag: 1, msg: `Booking ${status ? 'activated' : 'deactivated'} successfully` });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ flag: 0, msg: 'Server error' });
+    }
+
   }
-
-
 };
 
 module.exports = booknowControllers;
